@@ -17,7 +17,11 @@ public class Transport {
 	
 	
 	public Integer getInt(String key) {
-		if (map.get(key) instanceof Integer) {
+		Optional<Object> optionalKeyObject = Optional.ofNullable(map.get(key));
+		
+		Object keyObject = optionalKeyObject.orElseThrow(MissingKeyException::new);
+		
+		if (keyObject instanceof Integer) {
 			return (Integer) map.get(key);
 		} else {
 			throw new RuntimeException("Error! not a integer from " + generatorClass.getSimpleName());

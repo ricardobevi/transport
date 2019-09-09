@@ -34,11 +34,20 @@ public class TransportTest {
 	
 	
 	@Test(expected = MissingKeyException.class)
-	public void givenAMissingKeyShouldThrowException(){
+	public void givenAMissingStringKeyShouldThrowException(){
 		
 		Transport transport = new Transport(TransportTest.class);
 		
 		transport.getString("id");
+		
+	}
+	
+	@Test(expected = MissingKeyException.class)
+	public void givenAMissingIntKeyShouldThrowException(){
+		
+		Transport transport = new Transport(TransportTest.class);
+		
+		transport.getInt("id");
 		
 	}
 
