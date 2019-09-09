@@ -2,6 +2,7 @@ package com.ricardobevi.transport;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class Transport {
 	
@@ -24,7 +25,11 @@ public class Transport {
 	}
 	
 	public String getString(String key) {
-		if (map.get(key) instanceof String) {
+		Optional<Object> optionalKeyObject = Optional.ofNullable(map.get(key));
+		
+		Object keyObject = optionalKeyObject.orElseThrow(MissingKeyException::new);
+		
+		if (keyObject instanceof String) {
 			return (String) map.get(key);
 		} else {
 			throw new RuntimeException("Error! not a string from " + generatorClass.getSimpleName());
