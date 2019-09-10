@@ -1,9 +1,6 @@
 package com.ricardobevi.transport;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class Transport {
 	
@@ -18,13 +15,17 @@ public class Transport {
 		
 		
 		public Builder putInt(String key, Integer value) {
-			this.map.put(key, value);
+			putNotNull(key, value);
 			return this;
 		}
 		
 		public Builder putString(String key, String value) {
-			this.map.put(key, value);
+			putNotNull(key, value);
 			return this;
+		}
+		
+		private void putNotNull(String key, Object value) {
+			this.map.put(Objects.requireNonNull(key), Objects.requireNonNull(value));
 		}
 		
 		public Transport build(){
