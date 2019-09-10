@@ -52,18 +52,24 @@ public class Transport {
 	}
 	
 	
-	public class Builder {
+	public static class Builder {
 		private Class generatorClass;
 		private Map<String, Object> map;
 		
-		public Builder(){}
-		
-		public void putInt(String key, Integer value) {
-			this.map.put(key, value);
+		public Builder(Class generatorClass){
+			this.generatorClass = generatorClass;
+			this.map = new HashMap<>();
 		}
 		
-		public void putString(String key, String value) {
+		
+		public Builder putInt(String key, Integer value) {
 			this.map.put(key, value);
+			return this;
+		}
+		
+		public Builder putString(String key, String value) {
+			this.map.put(key, value);
+			return this;
 		}
 		
 		public Transport build(){

@@ -11,9 +11,9 @@ public class TransportTest {
 	@Test
 	public void givenAInteger10ReturnInteger10(){
 		
-		Transport transport = new Transport(TransportTest.class);
-		
-		transport.putInt("id", 10);
+		Transport transport = new Transport.Builder(TransportTest.class)
+			.putInt("id", 10)
+			.build();
 		
 		Integer id = transport.getInt("id");
 		
