@@ -23,9 +23,9 @@ public class TransportTest {
 	@Test
 	public void givenAStringLalaReturnStringLala(){
 		
-		Transport transport = new Transport(TransportTest.class);
-		
-		transport.putString("id", "lala");
+		Transport transport =  Transport.builder(TransportTest.class)
+			.putString("id", "lala")
+			.build();
 		
 		String id = transport.getString("id");
 		
@@ -36,7 +36,7 @@ public class TransportTest {
 	@Test(expected = MissingKeyException.class)
 	public void givenAMissingStringKeyShouldThrowException(){
 		
-		Transport transport = new Transport(TransportTest.class);
+		Transport transport = Transport.builder(TransportTest.class).build();
 		
 		transport.getString("id");
 		
@@ -45,7 +45,7 @@ public class TransportTest {
 	@Test(expected = MissingKeyException.class)
 	public void givenAMissingIntKeyShouldThrowException(){
 		
-		Transport transport = new Transport(TransportTest.class);
+		Transport transport = Transport.builder(TransportTest.class).build();
 		
 		transport.getInt("id");
 		
