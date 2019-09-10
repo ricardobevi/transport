@@ -50,26 +50,22 @@ public class Transport {
 	}
 	
 	public Integer getInt(String key) {
-		Optional<Object> optionalKeyObject = Optional.ofNullable(map.get(key));
-		
-		Object keyObject = optionalKeyObject.orElseThrow(MissingKeyException::new);
-		
-		if (keyObject instanceof Integer) {
-			return (Integer) map.get(key);
-		} else {
-			throw new RuntimeException("Error! not a integer from " + generatorClass.getSimpleName());
-		}
+		return (Integer) checkTypeAndGetObject(key, Integer.class);
 	}
 	
 	public String getString(String key) {
-		Optional<Object> optionalKeyObject = Optional.ofNullable(map.get(key));
+		return (String) checkTypeAndGetObject(key, String.class);
+	}
+	
+	private Object checkTypeAndGetObject(String key, Class aClass) {
+		Optional<Object> optionalValueObject = Optional.ofNullable(map.get(key));
 		
-		Object keyObject = optionalKeyObject.orElseThrow(MissingKeyException::new);
+		Object valueObject = optionalValueObject.orElseThrow(MissingKeyException::new);
 		
-		if (keyObject instanceof String) {
-			return (String) map.get(key);
+		if ( aClass.isInstance(valueObject) ) {
+			return aClass.cast(map.get(key));
 		} else {
-			throw new RuntimeException("Error! not a string from " + generatorClass.getSimpleName());
+			throw new RuntimeException("Error! not a " + aClass.getName() + " from " + generatorClass.getSimpleName());
 		}
 	}
 
