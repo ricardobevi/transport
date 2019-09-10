@@ -19,6 +19,10 @@ public class Transport {
 		this.map = map;
 	}
 	
+	public static Builder builder(Class generatorClass){
+		return new Builder(generatorClass);
+	}
+	
 	public Integer getInt(String key) {
 		Optional<Object> optionalKeyObject = Optional.ofNullable(map.get(key));
 		
