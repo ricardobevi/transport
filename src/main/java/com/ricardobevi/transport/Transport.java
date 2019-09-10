@@ -11,10 +11,13 @@ public class Transport {
 	
 	
 	public Transport(Class generatorClass) {
-		this.generatorClass = generatorClass;
-		this.map = new HashMap<>();
+		this(generatorClass, new HashMap<>());
 	}
 	
+	private Transport(Class generatorClass, Map<String, Object> map) {
+		this.generatorClass = generatorClass;
+		this.map = map;
+	}
 	
 	public Integer getInt(String key) {
 		Optional<Object> optionalKeyObject = Optional.ofNullable(map.get(key));
@@ -48,5 +51,25 @@ public class Transport {
 		this.map.put(key, value);
 	}
 	
+	
+	public class Builder {
+		private Class generatorClass;
+		private Map<String, Object> map;
+		
+		public Builder(){}
+		
+		public void putInt(String key, Integer value) {
+			this.map.put(key, value);
+		}
+		
+		public void putString(String key, String value) {
+			this.map.put(key, value);
+		}
+		
+		public Transport build(){
+			return new Transport(this.generatorClass, this.map);
+		}
+		
+	}
 
 }
