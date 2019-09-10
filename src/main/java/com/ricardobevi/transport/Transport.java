@@ -1,18 +1,43 @@
 package com.ricardobevi.transport;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
 public class Transport {
 	
-	private final Class generatorClass;
-	private Map<String, Object> map;
-	
-	
-	public Transport(Class generatorClass) {
-		this(generatorClass, new HashMap<>());
+	public static class Builder {
+		private Class generatorClass;
+		private Map<String, Object> map;
+		
+		public Builder(Class generatorClass){
+			this.generatorClass = generatorClass;
+			this.map = new HashMap<>();
+		}
+		
+		
+		public Builder putInt(String key, Integer value) {
+			this.map.put(key, value);
+			return this;
+		}
+		
+		public Builder putString(String key, String value) {
+			this.map.put(key, value);
+			return this;
+		}
+		
+		public Transport build(){
+			return new Transport(this.generatorClass, Collections.unmodifiableMap(this.map));
+		}
+		
 	}
+	
+	
+	
+	private final Class generatorClass;
+	private final Map<String, Object> map;
+	
 	
 	private Transport(Class generatorClass, Map<String, Object> map) {
 		this.generatorClass = generatorClass;
@@ -45,41 +70,6 @@ public class Transport {
 		} else {
 			throw new RuntimeException("Error! not a string from " + generatorClass.getSimpleName());
 		}
-	}
-	
-	public void putInt(String key, Integer value) {
-		this.map.put(key, value);
-	}
-	
-	public void putString(String key, String value) {
-		this.map.put(key, value);
-	}
-	
-	
-	public static class Builder {
-		private Class generatorClass;
-		private Map<String, Object> map;
-		
-		public Builder(Class generatorClass){
-			this.generatorClass = generatorClass;
-			this.map = new HashMap<>();
-		}
-		
-		
-		public Builder putInt(String key, Integer value) {
-			this.map.put(key, value);
-			return this;
-		}
-		
-		public Builder putString(String key, String value) {
-			this.map.put(key, value);
-			return this;
-		}
-		
-		public Transport build(){
-			return new Transport(this.generatorClass, this.map);
-		}
-		
 	}
 
 }
