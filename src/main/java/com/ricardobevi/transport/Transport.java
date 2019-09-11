@@ -49,12 +49,45 @@ public class Transport {
 		return new Builder(generatorClass);
 	}
 	
+	public Byte getByte(String key) {
+		return (Byte) checkTypeAndGetObject(key, Byte.class);
+	}
+	
+	public Short getShort(String key) {
+		return (Short) checkTypeAndGetObject(key, Short.class);
+	}
+	
 	public Integer getInt(String key) {
 		return (Integer) checkTypeAndGetObject(key, Integer.class);
 	}
 	
+	public Long getLong(String key) {
+		return (Long) checkTypeAndGetObject(key, Long.class);
+	}
+	
+	public Float getFloat(String key) {
+		return (Float) checkTypeAndGetObject(key, Float.class);
+	}
+	
+	public Double getDouble(String key) {
+		return (Double) checkTypeAndGetObject(key, Double.class);
+	}
+	
+	public Boolean getBoolean(String key) {
+		return (Boolean) checkTypeAndGetObject(key, Boolean.class);
+	}
+	
+	public Character getCharacter(String key) {
+		return (Character) checkTypeAndGetObject(key, Character.class);
+	}
+	
 	public String getString(String key) {
 		return (String) checkTypeAndGetObject(key, String.class);
+	}
+	
+	
+	public List<Transport> getList(String key) {
+		return (List) checkTypeAndGetObject(key, List.class);
 	}
 	
 	private Object checkTypeAndGetObject(String key, Class aClass) {
