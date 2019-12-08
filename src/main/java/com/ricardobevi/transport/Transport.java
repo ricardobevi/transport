@@ -24,6 +24,11 @@ public class Transport {
 			return this;
 		}
 		
+		public Builder putList(String key, List<Transport> value) {
+			putNotNull(key, value);
+			return this;
+		}
+		
 		private void putNotNull(String key, Object value) {
 			this.map.put(Objects.requireNonNull(key), Objects.requireNonNull(value));
 		}
